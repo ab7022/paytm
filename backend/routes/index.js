@@ -6,7 +6,7 @@ const account = require("./account")
 // router.use("/user",userRouter)
 // router.use("/account",account)
 router.use("/user",userRouter)
-router.use(account)
+router.use("/account",account)
 
 
 module.exports = router
