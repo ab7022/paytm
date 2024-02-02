@@ -10,11 +10,44 @@ import { useNavigate } from "react-router-dom";
 export default function Signin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(""); // New state to store error messages
   const navigate = useNavigate();
+
+  const handleSignIn = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/user/signin",
+        {
+          username,
+          password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      
+
+      console.log(response);
+
+      localStorage.setItem("token", response.data.token);
+      navigate("/dashboard");
+    } catch (error) {
+      console.error("Error signing in:", error);
+
+      // Check for specific error messages
+      if (error.response && error.response.status === 411) {
+        setError("Wrong username or password. Please try again.");
+      } else {
+        setError("An unexpected error occurred. Please try again later.");
+      }
+    }
+  };
 
   return (
     <div className="flex justify-center bg-gray-400 min-h-screen">
-      <div className="flex flex-col justify-center align-middle ">
+      <div className="flex flex-col justify-center align-middle">
         <div className="p-7 rounded-lg bg-gray-50">
           <div className="p-1">
             <Header label={"Sign in"} />
@@ -37,33 +70,8 @@ export default function Signin() {
                 setPassword(e.target.value);
               }}
             />
-            <Button
-              label={"Sign in"}
-              onClick={async () => {
-                try {
-                  const response = await axios.post(
-                    "http://localhost:3000/user/signin",
-                    JSON.stringify({
-                      username,
-                      password
-                    }),
-                    {
-                      headers: {
-                        "Content-Type": "application/json",
-                      },
-                    }
-                  );
-
-                  console.log(response);
-
-                  localStorage.setItem("token", response.data.token);
-                  navigate("/dashboard");
-                } catch (error) {
-                  console.error("Error signing up:", error);
-                  // Handle the error, show a message, or redirect to an error page
-                }
-              }}
-            />{" "}
+            {error && <p className="text-red-500 text-md">{error}</p>} {/* Display error message */}
+            <Button label={"Sign in"} onClick={handleSignIn} />
             <BottomWarning
               label={"Don't have an account?"}
               buttonText={"Sign up"}

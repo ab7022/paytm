@@ -55,7 +55,6 @@ export default function Signup() {
                 setPassword(e.target.value);
               }}
             />
-       
             <Button
               label={"Sign up"}
               onClick={async () => {
@@ -65,8 +64,8 @@ export default function Signup() {
                     JSON.stringify({
                       username,
                       password,
-                      fName:firstname,
-                      lName:lastName,
+                      fName: firstname,
+                      lName: lastName,
                     }),
                     {
                       headers: {
@@ -74,7 +73,6 @@ export default function Signup() {
                       },
                     }
                   );
-                  
                   console.log(response);
 
                   localStorage.setItem("token", response.data.token);
@@ -85,7 +83,6 @@ export default function Signup() {
                 }
               }}
             />
-
             <BottomWarning
               label={"Already have an account?"}
               buttonText={"Sign in"}
