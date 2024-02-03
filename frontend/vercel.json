@@ -1,5 +1,9 @@
 {
-    "routes": [
-      { "src": "/", "dest": "/signin" }
+    "rewrites": [
+      {
+        "source": "/(.*)",
+        "destination": "/signin"
+      }
     ]
   }
+  
