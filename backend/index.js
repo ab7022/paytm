@@ -2,15 +2,38 @@ const express = require("express");
 const app = express()
 const rootRouter = require("./routes/index")
 const cors = require("cors")
-const zod = require("zod")
+// const zod = require("zod")
 const {User,Account} = require("./database");
-const JWT_SECRET = require("./config");
-const jwt = require("jsonwebtoken");
-const mongoose = require("mongoose")
+// const JWT_SECRET = require("./config");
+// const jwt = require("jsonwebtoken");
+// const mongoose = require("mongoose")
 app.use(express.json())
+const {authMiddleware} = require("./middleware");
 app.use(cors())
-// app.use("api/v1",rootRouter)
 app.use(rootRouter)
+app.get("/dashboard", authMiddleware, async (req, res) => {
+  try {
+    const userId = req.userId;
+
+    const user = await User.findById(userId) // Use the lean() method to convert Mongoose document to a plain JS object
+
+    const account = await Account.findOne({
+      userId,
+    }); // Convert to plain JS object
+
+    res.status(200).json({
+      message: "Token is valid",
+      user,
+      account,
+    });
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+});
+
 
   app.use((err, req, res, next) => {
     console.error(err.stack);

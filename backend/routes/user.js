@@ -1,11 +1,13 @@
 // backend/routes/user.js
 const express = require("express");
 const router = express.Router();
-const {User,Account} = require("../database");
+const { User, Account } = require("../database");
 const JWT_SECRET = require("../config");
 const jwt = require("jsonwebtoken");
 const zod = require("zod");
-const {authMiddleware} = require("../middleware")
+const {authMiddleware}  = require("../middleware");
+router.use(express.json());
+
 router.post("/signup", async function (req, res) {
   const signupBody = zod.object({
     username: zod.string().email(),
@@ -34,6 +36,7 @@ router.post("/signup", async function (req, res) {
   if (existingUser) {
     return res.status(411).json({
       message: "Email already taken/Incorrect inputs",
+      existingUser,
     });
   }
 
@@ -49,10 +52,9 @@ router.post("/signup", async function (req, res) {
     const userId = user._id;
 
     await Account.create({
-      userId:userId,
-      amount:1+ Math.floor(Math.random()*1000)
-    })
-
+      userId: userId,
+      amount: 1 + Math.floor(Math.random() * 1000),
+    });
 
     const token = jwt.sign(
       {
@@ -74,7 +76,6 @@ router.post("/signup", async function (req, res) {
   }
 });
 
-
 router.post("/signin", async function (req, res) {
   const signinBody = zod.object({
     username: zod.string().email(),
@@ -86,6 +87,7 @@ router.post("/signin", async function (req, res) {
       message: "Wrong password or Incorrect inputs",
     });
   }
+
   const user = await User.findOne({
     username: req.body.username,
     password: req.body.password,
@@ -111,13 +113,11 @@ router.post("/signin", async function (req, res) {
 });
 
 const updateBody = zod.object({
-  username:zod.string().optional(),
-	password: zod.string().optional(),
+  username: zod.string().optional(),
+  password: zod.string().optional(),
   fName: zod.string().optional(),
   lName: zod.string().optional(),
-})
-
-
+});
 
 router.put("/update", authMiddleware, async (req, res) => {
   const { success, data: updateData } = updateBody.safeParse(req.body);
@@ -162,25 +162,30 @@ router.get("/bulk", async (req, res) => {
   const filter = req.query.filter || "";
 
   const users = await User.find({
-      $or: [{
-          firstName: {
-              "$regex": filter
-          }
-      }, {
-          lastName: {
-              "$regex": filter
-          }
-      }]
-  })
+    $or: [
+      {
+        firstName: {
+          $regex: filter,
+        },
+      },
+      {
+        lastName: {
+          $regex: filter,
+        },
+      },
+    ],
+  });
 
   res.json({
-      user: users.map(user => ({
-          username: user.username,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          _id: user._id
-      }))
-  })
-})
+    user: users.map((user) => ({
+      username: user.username,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      _id: user._id,
+    })),
+  });
+});
+
+
 
 module.exports = router;
