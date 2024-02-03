@@ -71,7 +71,7 @@ export default function SendMoney() {
             </div>
             <div className="flex flex-row align-center">
               <div className="h-12 w-12 pb-5 bg-green-500 rounded-full justify-center flex text-white text-2xl font-medium pt-1.5">
-                {name[0].toUpperCase()}
+                {name ? name[0].toUpperCase():null}
               </div>
               <div className="ml-5 mt-2 pb-5 text-xl font-semibold">{name}</div>
             </div>
