@@ -96,16 +96,17 @@ router.post("/signin", async function (req, res) {
   });
 
   if (user) {
-    const userId = user._id;
-    const token = jwt.sign(
-      {
-        userId,
-      },
-      JWT_SECRET
-    );
+    // const userId = user._id;
+    // const token = jwt.sign(
+    //   {
+    //     userId,
+    //   },
+    //   JWT_SECRET
+    // );
 
     res.json({
-      token: token,
+      // token: token,
+      msg:"success"
     });
     return;
   }
