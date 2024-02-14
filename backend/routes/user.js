@@ -8,6 +8,8 @@ const zod = require("zod");
 const {authMiddleware}  = require("../middleware");
 router.use(express.json());
 
+
+
 router.post("/signup", async function (req, res) {
   const signupBody = zod.object({
     username: zod.string().email(),

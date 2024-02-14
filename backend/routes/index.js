@@ -6,6 +6,11 @@ const authMiddleware  = require("../middleware")
 
 // router.use("/user",userRouter)
 // router.use("/account",account)
+router.get("/",function(req,res){
+    res.json({
+        msg:"it is working perfectly fine"
+    })
+})
 router.use("/user",userRouter)
 router.use("/account",account)
 
