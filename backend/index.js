@@ -5,7 +5,7 @@ const cors = require("cors")
 const zod = require("zod")
 const {User,Account} = require("./database");
 const JWT_SECRET = require("./config");
-const jwt = require("jsonwebtoken");
+// const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose")
 app.use(express.json())
 // const {authMiddleware} = require("./middleware");

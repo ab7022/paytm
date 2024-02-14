@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 const { User, Account } = require("../database");
 const JWT_SECRET = require("../config");
-const jwt = require("jsonwebtoken");
+// const jwt = require("jsonwebtoken");
 const zod = require("zod");
 const {authMiddleware}  = require("../middleware");
 router.use(express.json());
