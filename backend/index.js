@@ -8,10 +8,10 @@ const JWT_SECRET = require("./config");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose")
 app.use(express.json())
-const {authMiddleware} = require("./middleware");
+// const {authMiddleware} = require("./middleware");
 app.use(cors())
 app.use(rootRouter)
-app.get("/dashboard", authMiddleware, async (req, res) => {
+app.get("/dashboard",  async (req, res) => {
   try {
     const userId = req.userId;
 
@@ -40,5 +40,5 @@ app.get("/dashboard", authMiddleware, async (req, res) => {
     res.status(500).send('Something went wrong!');
   });
   
-app.listen(3000)
+app.listen(3000|| PORT)
 
