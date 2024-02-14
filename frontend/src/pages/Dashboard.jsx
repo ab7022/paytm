@@ -20,7 +20,7 @@ export default function Dashboard() {
 
         setUserData(response.data);
       } catch (error) {
-        navigate("/signin");
+        navigate("/");
       }
     };
 
