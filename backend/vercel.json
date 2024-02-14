@@ -2,13 +2,15 @@
     "version": 2,
     "builds": [
       {
-        "src": "index.js",  
-        "use": "@now/node"  
+        "src": "index.js",
+        "use": "@now/node"
       }
     ],
     "routes": [
-      { "src": "/(.*)", "dest": "/index.js" },
-      { "handle": "filesystem" }
+      { "src": "/signin", "dest": "/index.js" },
+      { "src": "/signup", "dest": "/index.js" },
+      { "src": "/dashboard", "dest": "/index.js" },
+      { "src": "/(.*)", "dest": "/index.js" }
     ]
   }
   

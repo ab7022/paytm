@@ -11,8 +11,8 @@ router.get("/",function(req,res){
         msg:"it is working perfectly fine"
     })
 })
-router.use("/user",userRouter)
-router.use("/account",account)
+router.use(userRouter)
+router.use(account)
 
 
 module.exports = router

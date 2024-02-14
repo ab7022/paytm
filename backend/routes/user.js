@@ -78,7 +78,7 @@ router.post("/signup", async function (req, res) {
   }
 });
 
-router.post("/", async function (req, res) {
+router.post("/signin", async function (req, res) {
   const signinBody = zod.object({
     username: zod.string().email(),
     password: zod.string(),
