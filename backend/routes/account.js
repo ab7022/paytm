@@ -4,7 +4,6 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const { Account, User } = require("../database");
 const { authMiddleware } = require("../middleware");
-const cors = require("cors")
 
 router.get("/balance",authMiddleware, async function (req, res) {
   try {
