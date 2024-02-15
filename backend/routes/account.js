@@ -32,7 +32,7 @@ router.get("/balance",authMiddleware, async function (req, res) {
   }
 });
 
-router.post("/transfer", async (req, res) => {
+router.post("/transfer", authMiddleware,async (req, res) => {
   const session = await mongoose.startSession();
   session.startTransaction();
 
@@ -43,6 +43,7 @@ router.post("/transfer", async (req, res) => {
       session
     );
       console.log(senderAccount);
+      
     if (!senderAccount || senderAccount.amount < amount) {
       await session.abortTransaction();
       return res.status(400).json({
