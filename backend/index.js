@@ -27,9 +27,7 @@ app.get("/",function(req,res){
       msg:"it is working perfectly fine"
   })
 })
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
-});
+
 app.use(rootRouter)
 app.get("/dashboard", authMiddleware, async (req, res) => {
   try {
