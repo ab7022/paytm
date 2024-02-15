@@ -50,7 +50,13 @@ router.post("/signup", async function (req, res) {
   });
 
   try {
-    await user.save();
+    await user.save((err) => {
+      if (err) {
+          console.error(err);
+      } else {
+          console.log('User saved successfully');
+      }
+  });
     const userId = user._id;
 
     await Account.create({

@@ -3,7 +3,7 @@ const zod = require("zod");
 
 mongoose.connect(
   "mongodb+srv://abdul:91oFy8etusfqQ3a5@cluster0.argigth.mongodb.net/paytm"
-);
+  , { useNewUrlParser: true, useUnifiedTopology: true });
 
 const userSchema = mongoose.Schema({
   username: {
