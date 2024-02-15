@@ -32,7 +32,7 @@ router.get("/balance",authMiddleware, async function (req, res) {
   }
 });
 
-router.post("/transfer",authMiddleware, async (req, res) => {
+router.post("/transfer", async (req, res) => {
   const session = await mongoose.startSession();
   session.startTransaction();
 
