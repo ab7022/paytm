@@ -29,7 +29,7 @@ app.get("/",function(req,res){
 })
 
 app.use(rootRouter)
-app.get("/dashboard", authMiddleware, async (req, res) => {
+app.get("/dashboard",  async (req, res) => {
   try {
     const userId = req.userId;
 
