@@ -31,7 +31,7 @@ export default function Signin() {
 
       console.log(response);
 
-      localStorage.setItem("token","Bearer ", response.data.token);
+      localStorage.setItem("token", "Bearer " + response.data.token);
       navigate("/dashboard");
     } catch (error) {
       console.error("Error signing in:", error);
