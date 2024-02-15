@@ -9,7 +9,7 @@ export default function Users({ label }) {
 
 
     useEffect(() => {
-      axios.get("http://localhost:3000/USER/bulk?filter="+ filter).then((response) => {
+      axios.get("https://paytm-backend-eta.vercel.app/bulk?filter="+ filter).then((response) => {
         setUsers(response.data.user);
       });
     }, [filter]);

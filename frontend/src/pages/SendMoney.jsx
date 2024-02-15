@@ -18,7 +18,7 @@ export default function SendMoney() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/dashboard", {
+        const response = await axios.get("https://paytm-backend-eta.vercel.app/dashboard", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
