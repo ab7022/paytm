@@ -60,7 +60,7 @@ export default function Signup() {
               onClick={async () => {
                 try {
                   const response = await axios.post(
-                    "http://localhost:3000/user/signup",
+                    "https://paytm-backend-eta.vercel.app/signup",
                     JSON.stringify({
                       username,
                       password,

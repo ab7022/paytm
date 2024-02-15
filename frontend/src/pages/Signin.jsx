@@ -16,7 +16,7 @@ export default function Signin() {
   const handleSignIn = async () => {
     try {
       const response = await axios.post(
-        "https://paytm-backend-eta.vercel.app/user/signin",
+        "https://paytm-backend-eta.vercel.app/signin",
         {
           username,
           password,
