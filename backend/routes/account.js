@@ -42,7 +42,7 @@ router.post("/transfer",authMiddleware, async (req, res) => {
     const senderAccount = await Account.findOne({ userId: req.userId }).session(
       session
     );
-
+      console.log(senderAccount);
     if (!senderAccount || senderAccount.amount < amount) {
       await session.abortTransaction();
       return res.status(400).json({
