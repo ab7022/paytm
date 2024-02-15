@@ -14,7 +14,7 @@ export default function Dashboard() {
       try {
         const response = await axios.get("https://paytm-backend-eta.vercel.app/dashboard", {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `${localStorage.getItem("token")}`,
           },
         });
 
