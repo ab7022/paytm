@@ -5,10 +5,10 @@ const cors = require("cors")
 const zod = require("zod")
 const {User,Account} = require("./database");
 const JWT_SECRET = require("./config");
-// const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose")
 app.use(express.json())
-// const {authMiddleware} = require("./middleware");
+const {authMiddleware} = require("./middleware");
 app.use(cors())
 
 // app.use((req, res, next) => {
@@ -30,7 +30,7 @@ app.listen(3000, () => {
   console.log('Server is running on port 3000');
 });
 app.use(rootRouter)
-app.get("/dashboard",  async (req, res) => {
+app.get("/dashboard", authMiddleware, async (req, res) => {
   try {
     const userId = req.userId;
 
