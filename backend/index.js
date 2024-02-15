@@ -9,7 +9,9 @@ const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose")
 app.use(express.json())
 const {authMiddleware} = require("./middleware");
-app.use(cors())
+app.use(cors({
+  origin: 'https://paytm-frontend-blue.vercel.app',
+}));
 
 // app.use((req, res, next) => {
 //   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
