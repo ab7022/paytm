@@ -2,6 +2,8 @@ const express = require("express")
 const router = express.Router()
 const userRouter = require("./user")
 const account = require("./account")
+const dashboard = require("./dasboard")
+
 const authMiddleware  = require("../middleware")
 const cors = require("cors")
 
@@ -14,6 +16,6 @@ router.get("/",function(req,res){
 })
 router.use(userRouter)
 router.use(account)
-
+router.use(dashboard)
 
 module.exports = router
