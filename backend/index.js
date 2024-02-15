@@ -1,14 +1,14 @@
 const express = require("express");
-const app = express()
-const rootRouter = require("./routes/index")
-const cors = require("cors")
-const zod = require("zod")
-const {User,Account} = require("./database");
+const app = express();
+const rootRouter = require("./routes/index");
+const zod = require("zod");
+const { User, Account } = require("./database");
 const JWT_SECRET = require("./config");
 const jwt = require("jsonwebtoken");
-const mongoose = require("mongoose")
-app.use(express.json())
-const {authMiddleware} = require("./middleware");
+const mongoose = require("mongoose");
+app.use(express.json());
+const { authMiddleware } = require("./middleware");
+const cors = require("cors");
 
 app.use(cors());
 
@@ -22,18 +22,18 @@ app.use(cors());
 // });
 
 // Other route handling goes here...
-app.get("/",function(req,res){
+app.get("/", function (req, res) {
   res.json({
-      msg:"it is working perfectly fine"
-  })
-})
+    msg: "it is working perfectly fine",
+  });
+});
 
-app.use(rootRouter)
-app.get("/dashboard",  async (req, res) => {
+app.use(rootRouter);
+app.get("/dashboard", async (req, res) => {
   try {
     const userId = req.userId;
 
-    const user = await User.findById(userId) // Use the lean() method to convert Mongoose document to a plain JS object
+    const user = await User.findById(userId); // Use the lean() method to convert Mongoose document to a plain JS object
 
     const account = await Account.findOne({
       userId,
@@ -52,11 +52,9 @@ app.get("/dashboard",  async (req, res) => {
   }
 });
 
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something went wrong!");
+});
 
-  app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something went wrong!');
-  });
-  
-app.listen(4000|| PORT)
-
+app.listen(4000 || PORT);

@@ -3,7 +3,9 @@ const router = express.Router()
 const userRouter = require("./user")
 const account = require("./account")
 const authMiddleware  = require("../middleware")
+const cors = require("cors")
 
+app.use(cors());
 // router.use("/user",userRouter)
 // router.use("/account",account)
 router.get("/",function(req,res){

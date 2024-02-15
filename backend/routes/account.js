@@ -4,7 +4,9 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const { Account, User } = require("../database");
 const { authMiddleware } = require("../middleware");
+const cors = require("cors")
 
+app.use(cors());
 router.get("/balance",authMiddleware, async function (req, res) {
   try {
     const account = await Account.findOne({
