@@ -44,7 +44,7 @@ export default function SendMoney() {
         },
         {
           headers: {
-            Authorization: localStorage.getItem("token"),
+            Authorization: `${localStorage.getItem("token")}`,
           },
         }
       );
