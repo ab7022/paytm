@@ -58,16 +58,16 @@ router.post("/signup", async function (req, res) {
       amount: 1 + Math.floor(Math.random() * 1000),
     });
 
-    const token = jwt.sign(
-      {
-        userId,
-      },
-      JWT_SECRET
-    );
+    // const token = jwt.sign(
+    //   {
+    //     userId,
+    //   },
+    //   JWT_SECRET
+    // );
 
     res.json({
       msg: "User Created Successfully",
-      token: token,
+      // token: token,
     });
   } catch (error) {
     // Handle save error
