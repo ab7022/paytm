@@ -37,7 +37,7 @@ export default function SendMoney() {
     try {
       setLoading(true); // Set loading to true when transfer starts
       await axios.post(
-        "http://localhost:3000/account/transfer",
+        "https://paytm-backend-eta.vercel.app/transfer",
         {
           to: id,
           amount,
