@@ -2,7 +2,7 @@ const express = require("express")
 const router = express.Router()
 const userRouter = require("./user")
 const account = require("./account")
-const dashboard = require("./dasboard")
+const dashboard = require("./dashboard")
 
 const authMiddleware  = require("../middleware")
 const cors = require("cors")

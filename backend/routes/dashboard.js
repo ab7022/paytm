@@ -7,7 +7,7 @@ const cors = require("cors")
 app.use(cors());
 
 
-router.get("/dashboard", async (req, res) => {
+router.get("/dashboard", authMiddleware,async (req, res) => {
     try {
       const userId = req.userId;
   
