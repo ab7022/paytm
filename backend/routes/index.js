@@ -6,6 +6,7 @@ const dashboard = require("./dasboard")
 
 const authMiddleware  = require("../middleware")
 const cors = require("cors")
+app.use(cors());
 
 // router.use("/user",userRouter)
 // router.use("/account",account)
