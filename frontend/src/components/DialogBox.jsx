@@ -1,10 +1,47 @@
-import React, { useState } from "react";
-import Button from "./Button";
-import QRCodeGenerator from "./QrCodeGenerator";
+import React, { useState } from 'react';
+import Button from './Button';
+import QRCodeGenerator from './QrCodeGenerator';
+import QRCodeScanner from './QrScanner';
+import { useNavigate } from 'react-router-dom';
 
-export default function DialogBox({ onClose,name }) {
+export default function DialogBox({ onClose, name }) {
   const [showQRCode, setShowQRCode] = useState(false);
-    
+  const [qrCodeData, setQrCodeData] = useState(null);
+  const navigate = useNavigate();
+
+  const handleScan = (data) => {
+    if (data) {
+      setQrCodeData(data);
+      // Your logic for handling the scanned data, e.g., initiate payment
+      handlePayMoney(data);
+    }
+  };
+
+  const handlePayMoney = (scannedData) => {
+    try {
+      // Parse the scanned data as JSON
+      const userData = JSON.parse(scannedData.text);
+      console.log(userData);
+  
+      // Check if the required fields are present in the parsed data
+      if (userData.id && userData.name) {
+        // Redirect to the appropriate page with user data
+        navigate(`/sendMoney?id=${userData.id}&name=${userData.name}`);
+      } else {
+        console.log("Invalid QR code data structure");
+        console.log(userData.text.id);
+        console.log(userData.text.name);
+
+        // Handle the case where the structure of the QR code data is invalid
+        // You might want to display an error message or handle it in another way
+      }
+    } catch (error) {
+      console.error("Error parsing QR code data as JSON", error);
+      // Handle the case where the scanned data is not a valid JSON
+      // You might want to display an error message or handle it in another way
+    }
+  };
+  
   const handleReceiveMoney = () => {
     setShowQRCode(true);
   };
@@ -26,9 +63,10 @@ export default function DialogBox({ onClose,name }) {
         {showQRCode ? (
           <div>
             <QRCodeGenerator
-              data={`{"id": "${name._id}", "name": "${name.firstName}"}`}
+              data={{ id: name._id, name: name.firstName }}
               size={190}
-            />{" "}
+            />
+
             <button
               className="border-2 border-red-600 rounded-lg px-3 py-2 text-red-600 cursor-pointer hover:bg-red-600 mx-16 hover:text-white "
               onClick={handleCloseQRCode}
@@ -44,6 +82,8 @@ export default function DialogBox({ onClose,name }) {
             Close
           </button>
         )}
+        <QRCodeScanner onScan={handleScan} />
+        {qrCodeData && <p>Scanned Data: {JSON.stringify(qrCodeData)}</p>}
       </div>
     </div>
   );

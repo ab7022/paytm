@@ -34,7 +34,7 @@ export default function Balance({ account }) {
       <div className="font-semibold justify-center text-center">
         Your Available Balance Is
       </div>
-      <div className="pl-2 font-medium text-xl font-semibold">
+      <div className="pl-2  text-xl font-semibold">
         {account.amount || "Loading"}
       </div>
     </div>
