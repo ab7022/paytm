@@ -4,7 +4,11 @@ const dotenv = require('dotenv');
 dotenv.config();
 mongoose.connect(
   process.env.MONGODB_URL
-  , { useNewUrlParser: true, useUnifiedTopology: true });
+  , { useNewUrlParser: true, useUnifiedTopology: true ,
+    auth: {
+      user: 'abdul',
+      password: process.env.MONGODB_PASSWORD,
+    },});
 
 const userSchema = mongoose.Schema({
   username: {
