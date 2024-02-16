@@ -10,11 +10,14 @@ import { useNavigate } from "react-router-dom";
 export default function Signin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(""); // New state to store error messages
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleSignIn = async () => {
     try {
+      setLoading(true);
+
       const response = await axios.post(
         "https://paytm-backend-eta.vercel.app/signin",
         {
@@ -27,21 +30,21 @@ export default function Signin() {
           },
         }
       );
-      
 
       console.log(response);
 
-      localStorage.setItem("token",  response.data.token);
+      localStorage.setItem("token", response.data.token);
       navigate("/dashboard");
     } catch (error) {
       console.error("Error signing in:", error);
 
-      // Check for specific error messages
-      if (error.response && error.response.status === 411) {
+      if (error.response && error.response.status === 401) {
         setError("Wrong username or password. Please try again.");
       } else {
         setError("An unexpected error occurred. Please try again later.");
       }
+    } finally {
+      setLoading(false); 
     }
   };
 
@@ -70,9 +73,13 @@ export default function Signin() {
                 setPassword(e.target.value);
               }}
             />
-            {error && <p className="text-red-500 text-md">{error}</p>} {/* Display error message */}
-            <Button label={"Sign in"} onClick={handleSignIn} />
-            <BottomWarning
+           
+            {error && <p className="text-red-500 text-md">{error}</p>}
+    <Button
+              label={loading ? "Signing in..." : "Sign in"}
+              onClick={handleSignIn}
+              disabled={loading}
+            />            <BottomWarning
               label={"Don't have an account?"}
               buttonText={"Sign up"}
               to={"/signup"}
