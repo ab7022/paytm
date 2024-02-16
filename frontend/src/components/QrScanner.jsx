@@ -20,7 +20,7 @@ export const QRCodeScanner = ({ onScan }) => {
     <QrScanner
       onScan={handleScan}
       onError={handleError}
-      constraints={{ facingMode: "environment" }}
+      constraints={{ video: true, facingMode: "environment" }}
       className="w-full max-h-64 border border-gray-300 rounded-xl shadow overflow-hidden"
     />
   );
