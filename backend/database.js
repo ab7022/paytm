@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 const zod = require("zod");
-
+const dotenv = require('dotenv');
+dotenv.config();
 mongoose.connect(
-  "mongodb+srv://abdul:91oFy8etusfqQ3a5@cluster0.argigth.mongodb.net/paytm"
+  process.env.MONGODB_URL
   , { useNewUrlParser: true, useUnifiedTopology: true });
 
 const userSchema = mongoose.Schema({
