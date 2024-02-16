@@ -19,7 +19,7 @@ export default function Signup() {
   return (
     <div className="flex justify-center bg-gray-400 min-h-screen">
       <div className="flex flex-col justify-center align-middle ">
-        <div className="p-5 rounded-lg bg-gray-50">
+        <div className="p-5 rounded-lg bg-gray-50 mx-4">
           <div className="p-1">
             <Header label={"Sign up"} />
             <SubHeader label={"Enter your information to create an account"} />

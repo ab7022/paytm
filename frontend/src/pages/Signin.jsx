@@ -48,7 +48,7 @@ export default function Signin() {
   return (
     <div className="flex justify-center bg-gray-400 min-h-screen">
       <div className="flex flex-col justify-center align-middle">
-        <div className="p-7 rounded-lg bg-gray-50">
+        <div className="p-7 rounded-lg bg-gray-50 mx-4">
           <div className="p-1">
             <Header label={"Sign in"} />
             <SubHeader
