@@ -44,7 +44,7 @@ export default function Signin() {
         setError("An unexpected error occurred. Please try again later.");
       }
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
@@ -73,13 +73,13 @@ export default function Signin() {
                 setPassword(e.target.value);
               }}
             />
-           
             {error && <p className="text-red-500 text-md">{error}</p>}
-    <Button
+            <Button
               label={loading ? "Signing in..." : "Sign in"}
               onClick={handleSignIn}
               disabled={loading}
-            />            <BottomWarning
+            />{" "}
+            <BottomWarning
               label={"Don't have an account?"}
               buttonText={"Sign up"}
               to={"/signup"}

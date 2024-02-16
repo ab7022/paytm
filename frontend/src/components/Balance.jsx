@@ -12,7 +12,6 @@ export default function Balance({ account }) {
   }, [account]);
 
   if (loading) {
-    // Show loading screen while data is being fetched
     return (
       <div className="flex flex-row text-center text-lg justify-center p-4 bg-gray-100">
       <div className="font-semibold justify-center text-center">

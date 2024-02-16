@@ -12,9 +12,39 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [firstname, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
-  console.log("Updated state:", { username, firstname, lastName, password });
-  console.log(password);
+
+  const handleSignup = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      const response = await axios.post(
+        "https://paytm-backend-eta.vercel.app/signup",
+        JSON.stringify({
+          username,
+          password,
+          fName: firstname,
+          lName: lastName,
+        }),
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      localStorage.setItem("token", response.data.token);
+      navigate("/dashboard");
+    } catch (error) {
+      setError("Error signing up. Please try again.");
+      console.error("Error signing up:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="flex justify-center bg-gray-400 min-h-screen">
@@ -56,33 +86,11 @@ export default function Signup() {
               }}
             />
             <Button
-              label={"Sign up"}
-              onClick={async () => {
-                try {
-                  const response = await axios.post(
-                    "https://paytm-backend-eta.vercel.app/signup",
-                    JSON.stringify({
-                      username,
-                      password,
-                      fName: firstname,
-                      lName: lastName,
-                    }),
-                    {
-                      headers: {
-                        "Content-Type": "application/json",
-                      },
-                    }
-                  );
-                  console.log(response);
-
-                  localStorage.setItem("token",response.data.token);
-                  navigate("/dashboard");
-                } catch (error) {
-                  console.error("Error signing up:", error);
-                  // Handle the error, show a message, or redirect to an error page
-                }
-              }}
+              label={loading ? "Signing Up..." : "Sign up"}
+              onClick={handleSignup}
+              disabled={loading}
             />
+            {error && <p className="text-red-500">{error}</p>}
             <BottomWarning
               label={"Already have an account?"}
               buttonText={"Sign in"}

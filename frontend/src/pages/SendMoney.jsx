@@ -18,11 +18,14 @@ export default function SendMoney() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://paytm-backend-eta.vercel.app/dashboard", {
-          headers: {
-            Authorization: `${localStorage.getItem("token")}`,
-          },
-        });
+        const response = await axios.get(
+          "https://paytm-backend-eta.vercel.app/dashboard",
+          {
+            headers: {
+              Authorization: `${localStorage.getItem("token")}`,
+            },
+          }
+        );
 
         setUserData(response.data);
       } catch (error) {
@@ -30,12 +33,12 @@ export default function SendMoney() {
       }
     };
 
-    fetchData(); // Invoke the async function
+    fetchData(); 
   }, []);
 
   const handleTransfer = async () => {
     try {
-      setLoading(true); // Set loading to true when transfer starts
+      setLoading(true); 
       await axios.post(
         "https://paytm-backend-eta.vercel.app/transfer",
         {
@@ -49,7 +52,6 @@ export default function SendMoney() {
         }
       );
       setSuccessMessage("Transfer successful");
-      // Redirect to the dashboard after a delay
       setTimeout(() => {
         navigate("/dashboard");
       }, 2000);
@@ -57,7 +59,7 @@ export default function SendMoney() {
       console.error("Transfer error:", error);
       setSuccessMessage("Transfer failed");
     } finally {
-      setLoading(false); // Set loading to false when transfer completes (either success or failure)
+      setLoading(false);
     }
   };
 
@@ -71,7 +73,7 @@ export default function SendMoney() {
             </div>
             <div className="flex flex-row align-center">
               <div className="h-12 w-12 pb-5 bg-green-500 rounded-full justify-center flex text-white text-2xl font-medium pt-1.5">
-                {name ? name[0].toUpperCase():null}
+                {name ? name[0].toUpperCase() : null}
               </div>
               <div className="ml-5 mt-2 pb-5 text-xl font-semibold">{name}</div>
             </div>

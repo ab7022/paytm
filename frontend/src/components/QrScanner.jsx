@@ -1,5 +1,5 @@
 // QRCodeScanner.jsx
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import QrScanner from "react-qr-scanner";
 
 export const QRCodeScanner = ({ onScan }) => {
@@ -8,7 +8,7 @@ export const QRCodeScanner = ({ onScan }) => {
   const handleScan = (data) => {
     if (data) {
       setQrCodeData(data);
-      onScan(data); // Pass the scanned data to the parent component
+      onScan(data);
     }
   };
 
@@ -18,11 +18,12 @@ export const QRCodeScanner = ({ onScan }) => {
 
   return (
     <QrScanner
-  onScan={handleScan}
-  onError={handleError}
-  className="w-full max-h-64 border border-gray-300 rounded-xl shadow overflow-hidden"
-/>
-  )
+      onScan={handleScan}
+      onError={handleError}
+      constraints={{ facingMode: "environment" }}
+      className="w-full max-h-64 border border-gray-300 rounded-xl shadow overflow-hidden"
+    />
+  );
 };
 
 export default QRCodeScanner;
