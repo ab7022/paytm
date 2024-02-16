@@ -18,11 +18,11 @@ export const QRCodeScanner = ({ onScan }) => {
 
   return (
     <QrScanner
-      onScan={handleScan}
-      onError={handleError}
-      style={{ width: '100%' }}
-    />
-  );
+  onScan={handleScan}
+  onError={handleError}
+  className="w-full max-h-64 border border-gray-300 rounded-xl shadow overflow-hidden"
+/>
+  )
 };
 
 export default QRCodeScanner;
