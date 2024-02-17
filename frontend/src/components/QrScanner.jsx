@@ -1,7 +1,6 @@
 // QRCodeScanner.jsx
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import QrScanner from "react-qr-scanner";
-
 export const QRCodeScanner = ({ onScan }) => {
   const [qrCodeData, setQrCodeData] = useState(null);
 
@@ -15,7 +14,11 @@ export const QRCodeScanner = ({ onScan }) => {
   const handleError = (error) => {
     console.error(error);
   };
-
+  useEffect(() => {
+    navigator.mediaDevices.enumerateDevices().then(devices => {
+      console.log(devices);
+    });
+  }, []);
   return (
     <QrScanner
       onScan={handleScan}
