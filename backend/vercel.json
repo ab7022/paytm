@@ -7,8 +7,10 @@
       }
     ],
     "routes": [
-      { "src": "/(.*)", "dest": "/index.html" }
-
+      { "src": "/", "dest": "/index.js" },
+      { "src": "/signup", "dest": "/index.js" },
+      { "src": "/dashboard", "dest": "/index.js" },
+      { "src": "/(.*)", "dest": "/index.js" }
     ]
   }
   
