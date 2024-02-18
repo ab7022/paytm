@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 
 export default function Dashboard() {
   const [userData, setUserData] = useState({ user: null, account: null });
+  const [accountBalance, setAccountBalance] = useState(null); 
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,13 +24,15 @@ export default function Dashboard() {
         );
 
         setUserData(response.data);
+        setAccountBalance(response.data.account ? response.data.account.amount : null);
+
       } catch (error) {
         navigate("/");
       }
     };
 
     checkToken();
-  }, [navigate]);
+  }, [navigate,userData]);
   const handleQRCodeScan = () => {
     const scannedUserData = {
       id: userData.user._id,
@@ -41,7 +45,7 @@ export default function Dashboard() {
   return (
     <div>
       <Appbar name={userData.user} />
-      <Balance account={userData.account} />
+      <Balance account={accountBalance} />
       <Users />
     </div>
   );
