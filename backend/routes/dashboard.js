@@ -9,7 +9,7 @@ router.get("/dashboard", authMiddleware,async (req, res) => {
     try {
       const userId = req.userId;
   
-      const user = await User.findById(userId); // Use the lean() method to convert Mongoose document to a plain JS object
+      const user = await User.findById(userId);
   
       const account = await Account.findOne({
         userId,
