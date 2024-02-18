@@ -21,7 +21,7 @@ export default function DialogBox({ onClose, name }) {
     try {
       // Parse the scanned data as JSON
       const userData = JSON.parse(scannedData.text);
-
+      console.log((userData));
       if (userData.id && userData.name) {
         navigate(`/sendMoney?id=${userData.id}&name=${userData.name}`);
       } else {
@@ -29,6 +29,7 @@ export default function DialogBox({ onClose, name }) {
       }
     } catch (error) {
       console.error("Error parsing QR code data as JSON", error);
+      
     }
   };
 
@@ -58,7 +59,7 @@ export default function DialogBox({ onClose, name }) {
         {showQRCode ? (
           <div>
             <QRCodeGenerator
-              data={{ id: name._id, name: name.firstName }}
+              data={JSON.stringify({ id: name._id, name: name.firstName })}
               size={170}
             />
             <button
@@ -76,7 +77,7 @@ export default function DialogBox({ onClose, name }) {
             Close
           </button>
         )}
-        {qrCodeData && <p>Scanned Data: {JSON.stringify(qrCodeData)}</p>}
+        {/* {qrCodeData && <p>Scanned Data: {JSON.stringify(qrCodeData)}</p>} */}
       </div>
     </div>
   );

@@ -7,8 +7,13 @@ export const QRCodeScanner = ({ onScan }) => {
 
   const handleScan = (data) => {
     if (data) {
-      setQrCodeData(data);
-      onScan(data);
+      try {
+        const parsedData = typeof data === 'object' ? data : JSON.parse(data);
+        setQrCodeData(parsedData);
+        onScan(parsedData);
+      } catch (error) {
+        console.error("Error parsing QR code data:", error);
+      }
     }
   };
 
