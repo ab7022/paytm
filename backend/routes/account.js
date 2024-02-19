@@ -47,10 +47,16 @@ router.post("/transfer", authMiddleware,async (req, res) => {
     if (!senderAccount || senderAccount.amount < amount) {
       await session.abortTransaction();
       return res.status(400).json({
-        message: "Insufficient balance",
+        message: "Invalid transfer amount",
       });
     }
-
+    if(amount<=0 || amount ===undefined || amount===null){
+      await session.abortTransaction();
+      return res.status(400).json({
+        message: "",
+      });
+    }
+    
     const toAccount = await Account.findOne({ userId: to }).session(session);
 
     if (!toAccount) {
